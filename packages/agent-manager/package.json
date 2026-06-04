@@ -1,0 +1,30 @@
+{
+	"name": "@earendil-works/pi-agent-manager",
+	"version": "0.75.4",
+	"private": true,
+	"type": "module",
+	"pi": {
+		"extensions": ["./src/index.ts"]
+	},
+	"scripts": {
+		"clean": "shx rm -rf dist",
+		"build:ui": "cd ui && npm install && npx vite build --outDir ../dist/ui",
+		"build:server": "tsgo -p tsconfig.json",
+		"build": "npm run build:ui && npm run build:server",
+		"check": "echo 'no type-only check'"
+	},
+	"dependencies": {
+		"@earendil-works/pi-coding-agent": "*",
+		"chokidar": "4.0.3",
+		"express": "5.2.1",
+		"typebox": "1.1.38",
+		"ws": "8.20.1",
+		"yaml": "2.9.0"
+	},
+	"devDependencies": {
+		"@types/express": "5.0.6",
+		"@types/node": "22.19.19",
+		"@types/ws": "8.18.1",
+		"shx": "0.4.0"
+	}
+}

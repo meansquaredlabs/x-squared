@@ -33,6 +33,7 @@ syntax.jsonl
 out.jsonl
 pi-*.html
 out.html
+reports/
 packages/coding-agent/binaries/
 todo.md
 plans/

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{REPORT_TITLE}}</title>
+<style>
+  :root {
+    --ivory:    #FAF9F5;
+    --slate:    #141413;
+    --clay:     #D97757;
+    --oat:      #E3DACC;
+    --gray-150: #F0EEE6;
+    --gray-300: #D1CFC5;
+    --gray-500: #87867F;
+    --gray-700: #3D3D3A;
+    --mono:     'Courier New', Courier, monospace;
+    --serif:    ui-serif, Georgia, 'Times New Roman', serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--mono);
+    background: var(--ivory);
+    color: var(--slate);
+    scroll-snap-type: y mandatory;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .slide {
+    width: 100vw;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10vh 8vw;
+  }
+  .slide-inner { width: 100%; max-width: 780px; }
+  .cover-slide { background: var(--slate); color: var(--ivory); }
+  .cover-slide .eyebrow { color: var(--gray-300); }
+  .final-slide { background: var(--slate); color: var(--ivory); }
+  .final-slide .eyebrow { color: var(--gray-300); }
+  .final-slide h2 { color: var(--ivory); }
+  .final-slide .sub-title { color: var(--gray-500); }
+  .final-slide .body-para { color: var(--gray-300); }
+  .final-slide .bullet-list li { color: var(--gray-300); }
+  .final-slide .sub-section { border-top-color: #2a2a28; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 5vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+    color: inherit;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(24px, 4vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin-bottom: 0;
+    color: inherit;
+  }
+  .exec-lead {
+    font-family: var(--mono);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--gray-300);
+    max-width: 580px;
+    margin-bottom: 16px;
+  }
+  .exec-rest p {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-500);
+    max-width: 580px;
+    margin-bottom: 10px;
+  }
+  .byline {
+    margin-top: 44px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray-500);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .trend-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--clay);
+    margin: 20px 0 32px;
+  }
+  .sub-section {
+    padding-top: 24px;
+    border-top: 1px solid var(--gray-150);
+    margin-bottom: 4px;
+  }
+  .sub-section:first-child { border-top: none; padding-top: 0; }
+  .sub-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 12px;
+  }
+  .body-para {
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: 12px;
+    max-width: 680px;
+  }
+  .bullet-list { list-style: none; padding: 0; margin-bottom: 10px; }
+  .bullet-list li {
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--gray-700);
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .bullet-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 10px;
+    height: 1.5px;
+    background: var(--clay);
+  }
+  #counter {
+    position: fixed;
+    bottom: 22px;
+    right: 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gray-500);
+    user-select: none;
+    z-index: 10;
+    letter-spacing: 0.05em;
+  }
+  @media print {
+    body { scroll-snap-type: none; }
+    .slide { page-break-after: always; }
+    #counter { display: none; }
+  }
+  @media (max-width: 640px) {
+    .slide { padding: 6vh 5vw; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER SLIDE — replace {{REPORT_TITLE}}, {{DATE}}, {{EXEC_LEAD}}, {{EXEC_BODY}} -->
+<section class="slide cover-slide" id="s0"><div class="slide-inner">
+  <div class="eyebrow">$ x-squared /..</div>
+  <h1>{{REPORT_TITLE}}</h1>
+  <p class="exec-lead">{{EXEC_LEAD}}</p>
+  <div class="exec-rest">{{EXEC_BODY}}</div>
+  <div class="byline"><span>x-squared</span><span>{{DATE}}</span></div>
+</div></section>
+
+<!-- CONTENT SLIDES — replace the block below with one <section> per finding/section.
+     Each slide follows this pattern:
+
+<section class="slide" id="sN"><div class="slide-inner">
+  <div class="eyebrow">CATEGORY LABEL</div>
+  <h2>Slide Title</h2>
+  <div class="trend-divider"></div>
+  <div class="trend-body">
+    <div class="sub-section">
+      <p class="body-para">Paragraph text.</p>
+      <ul class="bullet-list">
+        <li>Bullet point one</li>
+        <li>Bullet point two</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+     Use class="final-slide" on the last slide for the dark closing treatment.
+     Keep slide IDs sequential: s1, s2, s3 … -->
+
+{{CONTENT_SLIDES}}
+
+<div id="counter">1 / N</div>
+<script>(function(){var s=Array.from(document.querySelectorAll('.slide'));var c=document.getElementById('counter');var i=0;function go(n){i=Math.max(0,Math.min(s.length-1,n));s[i].scrollIntoView({behavior:'smooth'});}document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();go(i+1);}if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(i-1);}});var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){i=s.indexOf(e.target);c.textContent=(i+1)+' / '+s.length;}});},{threshold:0.5});s.forEach(function(x){o.observe(x);});})();</script>
+</body>
+</html>
